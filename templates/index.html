@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Totaalprijs uit PDF</title>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #f4f6f8; color: #1f2933; margin: 0; padding: 40px 16px; }
+        .card { max-width: 820px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+        h1 { margin-top: 0; font-size: 1.5rem; }
+        form.upload { display: flex; flex-direction: column; gap: 16px; }
+        input[type=file] { padding: 12px; border: 2px dashed #cbd2d9; border-radius: 8px; background: #fafbfc; }
+        button { padding: 12px; border: 0; border-radius: 8px; background: #2563eb; color: #fff; font-size: 1rem; cursor: pointer; }
+        button:hover { background: #1d4ed8; }
+        .result { margin-top: 24px; padding: 20px; border-radius: 8px; background: #ecfdf5; border: 1px solid #a7f3d0; }
+        .amount { font-size: 2rem; font-weight: 700; color: #047857; margin: 8px 0; }
+        .meta { font-size: .875rem; color: #52606d; }
+        code { background: #fff; padding: 2px 6px; border-radius: 4px; }
+        .dims { margin-top: 24px; padding: 20px; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; }
+        .dims h2 { margin: 0 0 12px; font-size: 1.1rem; }
+        .dims table { width: 100%; border-collapse: collapse; }
+        .dims th, .dims td { text-align: left; padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
+        .dims tr:last-child th, .dims tr:last-child td { border-bottom: 0; }
+        .dims td { text-align: right; font-weight: 600; }
+        .dims table.wg th { font-size: .875rem; color: #52606d; font-weight: 500; text-align: right; }
+        .dims table.wg th:first-child, .dims table.wg td:first-child { text-align: left; font-weight: 500; }
+
+        .tech h3 { margin: 20px 0 6px; font-size: .95rem; color: #334e68; }
+        .tech table { table-layout: fixed; }
+        .tech th, .tech td { vertical-align: top; text-align: left !important; font-weight: 400 !important; padding: 8px 8px 8px 0; }
+        .tech th.col { font-size: .8rem; color: #52606d; text-transform: uppercase; letter-spacing: .03em; }
+        .tech .lbl { width: 34%; }
+        .tech .val { width: 30%; }
+        .tech .src { font-size: .8rem; color: #52606d; }
+        .tech .sub { display: block; font-size: .8rem; color: #52606d; }
+        .tech .value { font-weight: 600; font-size: 1rem; }
+        .tech .nf { color: #b91c1c; font-weight: 600; }
+        .tech .warn { display: block; margin-top: 4px; font-size: .75rem; color: #b45309; }
+        .error { margin-top: 24px; padding: 16px; border-radius: 8px; background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Totaalprijs uit offerte-PDF</h1>
+    <form class="upload" method="post" action="{{ url_for('index') }}" enctype="multipart/form-data">
+        <input type="file" name="pdf" accept="application/pdf" required>
+        <button type="submit">Uploaden en totaalprijs ophalen</button>
+    </form>
+
+    {% if result %}
+    <div class="result">
+        <div class="meta">Bestand: {{ filename }}</div>
+        <div class="amount">{{ result.amount }}</div>
+        <div class="meta">Gevonden bij <strong>{{ result.label }}</strong>: <code>{{ result.line }}</code></div>
+    </div>
+    {% endif %}
+
+    {% if dimensions %}
+    <div class="dims">
+        <h2>Stalafmetingen</h2>
+        <table>
+            {% for name, value in dimensions.items() %}
+            <tr>
+                <th>{{ name }}</th>
+                <td>{{ value if value else "niet gevonden" }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+
+    {% if wintergarden is not none %}
+    <div class="dims">
+        <h2>Wintergarden</h2>
+        {% if wintergarden %}
+        <table class="wg">
+            <tr><th>Zijde</th><th>Lengte</th><th>Breedte</th></tr>
+            {% for wg in wintergarden %}
+            <tr>
+                <td>{{ wg.zijde }}</td>
+                <td>{{ wg.lengte }}</td>
+                <td>{{ wg.breedte }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p class="meta">Geen wintergarden-afmetingen gevonden.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if doc %}
+    <div class="dims tech">
+        <h2>Technische projectgegevens</h2>
+        <p class="meta">Uitgelezen uit de offerte, met bron en pagina per waarde.</p>
+            {% for groep in doc.technische_gegevens | map(attribute='groep') | unique %}
+            <h3>{{ groep }}</h3>
+            <table>
+                <tr>
+                    <th class="col lbl">Gegeven</th>
+                    <th class="col val">Waarde</th>
+                    <th class="col">Bron</th>
+                </tr>
+                {% for veld in doc.technische_gegevens if veld.groep == groep %}
+                {% for w in veld.waarden %}
+                <tr>
+                    <td class="lbl">
+                        {{ veld.label }}
+                        <span class="sub">{{ veld.bron_label }}{% if w.sublabel %} · {{ w.sublabel }}{% endif %}</span>
+                    </td>
+                    <td class="val">
+                        {% if w.origineel %}
+                        <span class="value">{{ w.origineel }}</span>
+                        {% if w.waarschuwing %}
+                        <span class="warn">⚠ {{ w.waarschuwing }} – niet meegenomen in vergelijking</span>
+                        {% endif %}
+                        {% else %}
+                        <span class="nf">Niet gevonden</span>
+                        {% endif %}
+                    </td>
+                    <td class="src">
+                        {% if w.origineel %}
+                        {{ doc.document }}{% if w.pagina %}, pagina {{ w.pagina }}{% endif %}
+                        <span class="sub" title="Regel uit de offerte"><code>{{ w.bronregel }}</code></span>
+                        {% else %}
+                        <span class="nf">Niet gevonden</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+            </table>
+            {% endfor %}
+
+            <p class="meta">Opgeslagen als <code>data/{{ doc.document_id }}.json</code></p>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+</div>
+</body>
+</html>

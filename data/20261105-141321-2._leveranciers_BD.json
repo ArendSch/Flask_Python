@@ -1,0 +1,228 @@
+{
+  "document_id": "20261105-141321-2._leveranciers_BD",
+  "document": "2. leveranciers BD.pdf",
+  "soort": "leveranciersofferte",
+  "uitgelezen_op": "2026-11-05T14:13:21",
+  "samenvatting": {
+    "totaalprijs": {
+      "label": "Angebotspreis",
+      "amount": "€ 250.522,35",
+      "line": "Angebotspreis 250.522,35 €",
+      "bedrag": 250522.35
+    },
+    "stalafmetingen": {
+      "Lengte": "105,00 m",
+      "Breedte": "15,00 m",
+      "Goothoogte": "2,60 m",
+      "Nokhoogte": "5,33 m"
+    },
+    "wintergarden": [
+      {
+        "zijde": "Links",
+        "lengte": "105,00 m",
+        "breedte": "3,75 m"
+      },
+      {
+        "zijde": "Rechts",
+        "lengte": "105,00 m",
+        "breedte": "3,75 m"
+      }
+    ]
+  },
+  "technische_gegevens": [
+    {
+      "key": "spanning",
+      "groep": "Elektrische voorzieningen",
+      "label": "Spanning",
+      "bron_label": "Spannung",
+      "gevonden": true,
+      "waarden": [
+        {
+          "sublabel": null,
+          "origineel": "400 V",
+          "getal": 400.0,
+          "eenheid": "V",
+          "pagina": 4,
+          "bronregel": "- Spannung: 400 V"
+        }
+      ]
+    },
+    {
+      "key": "frequentie",
+      "groep": "Elektrische voorzieningen",
+      "label": "Frequentie",
+      "bron_label": "Frequenz",
+      "gevonden": true,
+      "waarden": [
+        {
+          "sublabel": null,
+          "origineel": "50 Hz",
+          "getal": 50.0,
+          "eenheid": "Hz",
+          "pagina": 4,
+          "bronregel": "- Frequenz: 50 Hz"
+        }
+      ]
+    },
+    {
+      "key": "fasen",
+      "groep": "Elektrische voorzieningen",
+      "label": "Aantal fasen",
+      "bron_label": "Phasen",
+      "gevonden": true,
+      "waarden": [
+        {
+          "sublabel": null,
+          "origineel": "3",
+          "getal": 3.0,
+          "eenheid": "",
+          "pagina": 4,
+          "bronregel": "- Phasen: 3"
+        }
+      ]
+    },
+    {
+      "key": "lengte_incl_eindsets",
+      "groep": "Afmetingen stalinrichting",
+      "label": "Lengte inclusief eindsets",
+      "bron_label": "Anlagenlänge inkl. Endsätze",
+      "gevonden": true,
+      "waarden": [
+        {
+          "sublabel": null,
+          "origineel": "101,43 m",
+          "getal": 101.43,
+          "eenheid": "m",
+          "pagina": 4,
+          "bronregel": "- Anlagenlänge inkl. Endsätze: 101,43 m"
+        }
+      ]
+    },
+    {
+      "key": "gangbreedtes",
+      "groep": "Afmetingen stalinrichting",
+      "label": "Gangbreedtes",
+      "bron_label": "Gangbreiten",
+      "gevonden": true,
+      "waarden": [
+        {
+          "sublabel": null,
+          "origineel": "1.89 m",
+          "getal": 1.89,
+          "eenheid": "m",
+          "pagina": 4,
+          "bronregel": "- Gangbreiten: 1.89 m"
+        }
+      ]
+    },
+    {
+      "key": "ruimte_voor_eindset",
+      "groep": "Afmetingen stalinrichting",
+      "label": "Ruimte vóór eindset",
+      "bron_label": "Platz vor Endsatz",
+      "gevonden": true,
+      "waarden": [
+        {
+          "sublabel": null,
+          "origineel": "1,57 m",
+          "getal": 1.57,
+          "eenheid": "m",
+          "pagina": 4,
+          "bronregel": "- Platz vor Endsatz: 1,57 m"
+        }
+      ]
+    },
+    {
+      "key": "ruimte_achter_eindset",
+      "groep": "Afmetingen stalinrichting",
+      "label": "Ruimte achter eindset",
+      "bron_label": "Platz hinter Endsatz",
+      "gevonden": true,
+      "waarden": [
+        {
+          "sublabel": null,
+          "origineel": "2,00 m",
+          "getal": 2.0,
+          "eenheid": "m",
+          "pagina": 4,
+          "bronregel": "- Platz hinter Endsatz: 2,00 m"
+        }
+      ]
+    },
+    {
+      "key": "aantal_dieren",
+      "groep": "Stalgegevens",
+      "label": "Aantal dieren per stal",
+      "bron_label": "Anzahl Tiere pro Stall",
+      "gevonden": true,
+      "waarden": [
+        {
+          "sublabel": null,
+          "origineel": "31.723",
+          "getal": 31723.0,
+          "eenheid": "",
+          "pagina": 4,
+          "bronregel": "Anzahl Tiere pro Stall: 31.723"
+        }
+      ]
+    },
+    {
+      "key": "goothoogte",
+      "groep": "Stalgegevens",
+      "label": "Goothoogte",
+      "bron_label": "Traufenhöhe",
+      "gevonden": true,
+      "waarden": [
+        {
+          "sublabel": null,
+          "origineel": "2,60 m",
+          "getal": 2.6,
+          "eenheid": "m",
+          "pagina": 4,
+          "bronregel": "- Traufenhöhe: 2,60 m"
+        }
+      ]
+    },
+    {
+      "key": "wintergarden",
+      "groep": "Stalgegevens",
+      "label": "Afmetingen wintergarden",
+      "bron_label": "Kaltscharrraum – Abmessungen",
+      "gevonden": true,
+      "waarden": [
+        {
+          "sublabel": "Links – lengte",
+          "origineel": "105,00 m",
+          "getal": 105.0,
+          "eenheid": "m",
+          "pagina": 4,
+          "bronregel": "- Links: 105,00 m x 3,75 m"
+        },
+        {
+          "sublabel": "Links – breedte",
+          "origineel": "3,75 m",
+          "getal": 3.75,
+          "eenheid": "m",
+          "pagina": 4,
+          "bronregel": "- Links: 105,00 m x 3,75 m"
+        },
+        {
+          "sublabel": "Rechts – lengte",
+          "origineel": "105,00 m",
+          "getal": 105.0,
+          "eenheid": "m",
+          "pagina": 4,
+          "bronregel": "- Rechts: 105,00 m x 3,75 m"
+        },
+        {
+          "sublabel": "Rechts – breedte",
+          "origineel": "3,75 m",
+          "getal": 3.75,
+          "eenheid": "m",
+          "pagina": 4,
+          "bronregel": "- Rechts: 105,00 m x 3,75 m"
+        }
+      ]
+    }
+  ]
+}
